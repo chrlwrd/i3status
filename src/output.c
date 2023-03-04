@@ -27,6 +27,8 @@ char *color(const char *colorstr) {
         (void)snprintf(colorbuf, sizeof(colorbuf), "^fg(%s)", cfg_getstr(cfg_general, colorstr));
     else if (output_format == O_XMOBAR)
         (void)snprintf(colorbuf, sizeof(colorbuf), "<fc=%s>", cfg_getstr(cfg_general, colorstr));
+    else if (output_format == O_WAYBAR)
+        (void)snprintf(colorbuf, sizeof(colorbuf), "<span foreground='%s'>", cfg_getstr(cfg_general, colorstr));
     else if (output_format == O_LEMONBAR)
         (void)snprintf(colorbuf, sizeof(colorbuf), "%%{F%s}", cfg_getstr(cfg_general, colorstr));
     else if (output_format == O_TERM) {
@@ -52,6 +54,8 @@ char *color(const char *colorstr) {
 char *endcolor(void) {
     if (output_format == O_XMOBAR)
         return "</fc>";
+    else if (output_format == O_WAYBAR)
+        return "</span>";
     else if (output_format == O_TERM)
         return "\033[0m";
     else
@@ -66,6 +70,8 @@ void print_separator(const char *separator) {
         printf("^fg(%s)%s^fg()", cfg_getstr(cfg_general, "color_separator"), separator);
     else if (output_format == O_XMOBAR)
         printf("<fc=%s>%s</fc>", cfg_getstr(cfg_general, "color_separator"), separator);
+    else if (output_format == O_WAYBAR)
+        printf("<span foreground='%s'>%s</span>", cfg_getstr(cfg_general, "color_separator"), separator);
     else if (output_format == O_LEMONBAR)
         printf("%%{F%s}%s%%{F-}", cfg_getstr(cfg_general, "color_separator"), separator);
     else if (output_format == O_TERM)

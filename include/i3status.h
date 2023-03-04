@@ -4,6 +4,7 @@
 typedef enum {
     O_DZEN2,
     O_XMOBAR,
+    O_WAYBAR,
     O_I3BAR,
     O_LEMONBAR,
     O_TERM,
